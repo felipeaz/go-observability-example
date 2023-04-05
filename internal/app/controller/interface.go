@@ -1,7 +1,11 @@
 package controller
 
-import "go-observability-example/internal/app/domain"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 type Controller interface {
-	GetVehicle() domain.Vehicle
+	CreateVehicle(ctx *gin.Context)
+	GetVehicle(ctx *gin.Context)
+	GetVehicleByPlate(ctx *gin.Context)
 }

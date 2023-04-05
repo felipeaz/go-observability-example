@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-observability-example/internal/app/domain"
+
 	"go-observability-example/internal/app/service"
 )
 
@@ -21,10 +21,17 @@ func New(args Args) Controller {
 		router:  args.Router,
 		service: args.Service,
 	}
-	return c
+	return c.Initialize()
 }
 
-func (c controller) GetVehicle() domain.Vehicle {
-	//TODO implement me
-	panic("implement me")
+func (c *controller) CreateVehicle(ctx *gin.Context) {
+
+}
+
+func (c *controller) GetVehicle(ctx *gin.Context) {
+
+}
+
+func (c *controller) GetVehicleByPlate(ctx *gin.Context) {
+
 }
