@@ -6,7 +6,7 @@ import (
 	"go-observability-example/internal/app/service"
 )
 
-type Args struct {
+type ControllerDeps struct {
 	Router  *gin.Engine
 	Service service.Service
 }
@@ -16,10 +16,10 @@ type controller struct {
 	service service.Service
 }
 
-func New(args Args) Controller {
+func New(deps ControllerDeps) Controller {
 	c := controller{
-		router:  args.Router,
-		service: args.Service,
+		router:  deps.Router,
+		service: deps.Service,
 	}
 	return c.Initialize()
 }

@@ -6,10 +6,14 @@ import (
 	"go-observability-example/internal/app/domain"
 )
 
-type Args struct {
+type ServiceDeps struct {
 }
 
 type service struct {
+}
+
+func New(deps ServiceDeps) Service {
+	return &service{}
 }
 
 func (s *service) CreateVehicle(ctx context.Context) (plate string, err error) {
