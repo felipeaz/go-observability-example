@@ -1,7 +1,7 @@
 package controller
 
 func (c *controller) InitializeRoutes() {
-	vehicles := c.router.Group("/vehicles")
+	vehicles := c.router.Group("/api")
 
 	v1 := vehicles.Group("/v1")
 	v1.POST("/vehicle", c.CreateVehicle)
