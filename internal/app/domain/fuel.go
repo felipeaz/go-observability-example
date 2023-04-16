@@ -10,6 +10,6 @@ var (
 
 type FuelTank struct {
 	AcceptsGasoline bool
-	AccepsAlcohol   bool
+	AcceptsAlcohol  bool
 	State           FuelState
 }

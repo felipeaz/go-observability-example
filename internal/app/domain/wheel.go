@@ -10,4 +10,5 @@ var (
 
 type Wheel struct {
 	State WheelState
+	Size  int
 }
