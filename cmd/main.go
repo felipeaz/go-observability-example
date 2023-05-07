@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-observability-example/infra/redis"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -12,10 +13,14 @@ import (
 func main() {
 	ginEngine := gin.Default()
 
+	redisServer := redis.New("localhost", "6379")
+
 	appController := controller.New(controller.Params{
 		Router: ginEngine,
 		Service: service.New(
-			service.Params{},
+			service.Params{
+				Storage: redisServer,
+			},
 		),
 	})
 

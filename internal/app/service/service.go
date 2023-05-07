@@ -4,16 +4,21 @@ import (
 	"context"
 
 	"go-observability-example/internal/app/domain"
+	"go-observability-example/internal/app/storage"
 )
 
 type Params struct {
+	Storage storage.Storage
 }
 
 type service struct {
+	storage storage.Storage
 }
 
 func New(p Params) Service {
-	return &service{}
+	return &service{
+		storage: p.Storage,
+	}
 }
 
 func (s *service) CreateVehicle(ctx context.Context) (plate string, err error) {
