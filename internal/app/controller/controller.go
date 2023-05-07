@@ -7,7 +7,7 @@ import (
 	"go-observability-example/internal/app/service"
 )
 
-type ControllerDeps struct {
+type Params struct {
 	Router  *gin.Engine
 	Service service.Service
 }
@@ -17,12 +17,14 @@ type controller struct {
 	service service.Service
 }
 
-func New(deps ControllerDeps) Controller {
-	c := controller{
-		router:  deps.Router,
-		service: deps.Service,
+func New(p Params) Controller {
+	ctrl := &controller{
+		router:  p.Router,
+		service: p.Service,
 	}
-	return c.Initialize()
+	defer ctrl.initializeRoutes()
+
+	return ctrl
 }
 
 func (c *controller) CreateVehicle(ctx *gin.Context) {

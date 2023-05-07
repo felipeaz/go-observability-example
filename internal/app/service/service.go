@@ -6,27 +6,24 @@ import (
 	"go-observability-example/internal/app/domain"
 )
 
-type ServiceDeps struct {
+type Params struct {
 }
 
 type service struct {
 }
 
-func New(deps ServiceDeps) Service {
+func New(p Params) Service {
 	return &service{}
 }
 
 func (s *service) CreateVehicle(ctx context.Context) (plate string, err error) {
-	//TODO implement me
-	panic("implement me")
+	return "", nil
 }
 
 func (s *service) GetVehicle(ctx context.Context) ([]domain.Vehicle, error) {
-	//TODO implement me
-	panic("implement me")
+	return nil, nil
 }
 
 func (s *service) GetVehicleByPlate(ctx context.Context, plate string) (domain.Vehicle, error) {
-	//TODO implement me
-	panic("implement me")
+	return nil, nil
 }

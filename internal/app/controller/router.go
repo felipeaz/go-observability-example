@@ -1,6 +1,6 @@
 package controller
 
-func (c *controller) InitializeRoutes() {
+func (c *controller) initializeRoutes() {
 	vehicles := c.router.Group("/api")
 
 	v1 := vehicles.Group("/v1")

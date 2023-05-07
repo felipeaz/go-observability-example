@@ -12,10 +12,10 @@ import (
 func main() {
 	ginEngine := gin.Default()
 
-	appController := controller.New(controller.ControllerDeps{
+	appController := controller.New(controller.Params{
 		Router: ginEngine,
 		Service: service.New(
-			service.ServiceDeps{},
+			service.Params{},
 		),
 	})
 
