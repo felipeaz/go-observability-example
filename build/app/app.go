@@ -7,7 +7,7 @@ import (
 	"go-observability-example/internal/app/controller"
 )
 
-type AppDeps struct {
+type Params struct {
 	Router     *gin.Engine
 	Controller controller.Controller
 }
@@ -17,17 +17,19 @@ type App interface {
 }
 
 type app struct {
-	deps AppDeps
+	router     *gin.Engine
+	controller controller.Controller
 }
 
-func Build(deps AppDeps) App {
-	prometheus.RegisterMetrics(deps.Router)
+func Build(p Params) App {
+	prometheus.RegisterMetrics(p.Router)
 
 	return &app{
-		deps: deps,
+		router:     p.Router,
+		controller: p.Controller,
 	}
 }
 
 func (a *app) Run(addr string) error {
-	return a.deps.Router.Run(addr)
+	return a.router.Run(addr)
 }

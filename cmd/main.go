@@ -19,7 +19,7 @@ func main() {
 		),
 	})
 
-	serviceApp := app.Build(app.AppDeps{
+	serviceApp := app.Build(app.Params{
 		Router:     ginEngine,
 		Controller: appController,
 	})
