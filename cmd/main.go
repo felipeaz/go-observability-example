@@ -1,11 +1,11 @@
 package main
 
 import (
-	"go-observability-example/infra/redis"
 	"log"
 
 	"github.com/gin-gonic/gin"
 	"go-observability-example/build/app"
+	"go-observability-example/infra/redis"
 	"go-observability-example/internal/app/controller"
 	"go-observability-example/internal/app/service"
 )
