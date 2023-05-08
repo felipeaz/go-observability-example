@@ -24,7 +24,7 @@ func New(host, port string) *Redis {
 func (r *Redis) connect() (redigo.Conn, error) {
 	conn, err := redigo.Dial("tcp", r.getHost())
 	if err != nil {
-		log.Fatalf(_failedToConnectToRedisServer, err)
+		return nil, fmt.Errorf(_failedToConnectToRedisServer, err)
 	}
 
 	return conn, err

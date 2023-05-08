@@ -13,7 +13,7 @@ import (
 func main() {
 	ginEngine := gin.Default()
 
-	redisServer := redis.New("localhost", "6379")
+	redisServer := redis.New("redis", "6379")
 
 	appController := controller.New(controller.Params{
 		Router: ginEngine,

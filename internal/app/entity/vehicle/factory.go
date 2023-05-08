@@ -9,7 +9,7 @@ import (
 
 var errorInvalidVehicleModel = errors.New("invalid vehicle model")
 
-func Factory(model domain.VehicleModel) (*Vehicle, error) {
+func Factory(model domain.VehicleModel) (*domain.Vehicle, error) {
 	switch model {
 	case bmw.Model:
 		return bmw.NewVehicle(), nil

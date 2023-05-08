@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"encoding/json"
+	"go-observability-example/internal/app/entity/vehicle"
 
 	"go-observability-example/internal/app/domain"
 	"go-observability-example/internal/app/storage"
@@ -22,13 +24,30 @@ func New(p Params) Service {
 }
 
 func (s *service) CreateVehicle(ctx context.Context, request CreateVehicleRequest) (plate string, err error) {
-	return "", nil
+	v, err := vehicle.Factory(request.VehicleModel)
+	if err != nil {
+		return "", err
+	}
+
+	err = s.storage.Set(v.Plate, v)
+	if err != nil {
+		return "", err
+	}
+
+	return v.Plate, nil
 }
 
-func (s *service) GetVehicle(ctx context.Context) ([]domain.Vehicle, error) {
-	return nil, nil
-}
+func (s *service) GetVehicleByPlate(ctx context.Context, plate string) (domain.VehicleInterface, error) {
+	var vobj *domain.Vehicle
+	vbytes, err := s.storage.Get(plate)
+	if err != nil {
+		return nil, err
+	}
 
-func (s *service) GetVehicleByPlate(ctx context.Context, plate string) (domain.Vehicle, error) {
-	return nil, nil
+	err = json.Unmarshal(vbytes, &vobj)
+	if err != nil {
+		return nil, err
+	}
+
+	return vobj, nil
 }

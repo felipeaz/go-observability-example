@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"go-observability-example/internal/app/domain"
-	"go-observability-example/internal/app/entity/vehicle"
 	"go-observability-example/internal/app/entity/vehicle/models/plate"
 )
 
@@ -18,8 +17,8 @@ const (
 	_fuelAcceptsAlcohol                      = false
 )
 
-func NewVehicle() *vehicle.Vehicle {
-	return &vehicle.Vehicle{
+func NewVehicle() *domain.Vehicle {
+	return &domain.Vehicle{
 		Plate:    fmt.Sprintf(_plateFmt, Model, plate.New()),
 		Doors:    _doors,
 		MaxSpeed: _maxSpeed,
