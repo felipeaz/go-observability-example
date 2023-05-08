@@ -3,9 +3,8 @@ package domain
 type WheelState string
 
 var (
-	FlatState   = "FLAT"
-	FullState   = "FULL"
-	BrokenState = "BROKEN"
+	FlatWheel WheelState = "FLAT"
+	FullWheel WheelState = "FULL"
 )
 
 type Wheel struct {

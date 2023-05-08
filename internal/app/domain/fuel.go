@@ -3,9 +3,8 @@ package domain
 type FuelState string
 
 var (
-	Full    = "FULL"
-	Empty   = "EMPTY"
-	Reserve = "RESERVE"
+	FuelFull  FuelState = "FULL"
+	FuelEmpty FuelState = "EMPTY"
 )
 
 type FuelTank struct {
