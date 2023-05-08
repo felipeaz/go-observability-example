@@ -1,5 +1,12 @@
 package domain
 
+type VehicleModel string
+
+var (
+	BMW  = "BMW"
+	Audi = "AUDI"
+)
+
 type Vehicle interface {
 	Drive()
 	Doors() int

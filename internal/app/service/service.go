@@ -21,7 +21,7 @@ func New(p Params) Service {
 	}
 }
 
-func (s *service) CreateVehicle(ctx context.Context) (plate string, err error) {
+func (s *service) CreateVehicle(ctx context.Context, request CreateVehicleRequest) (plate string, err error) {
 	return "", nil
 }
 

@@ -28,7 +28,14 @@ func New(p Params) Controller {
 }
 
 func (c *controller) CreateVehicle(ctx *gin.Context) {
-	resp, err := c.service.CreateVehicle(ctx)
+	var req service.CreateVehicleRequest
+	err := ctx.ShouldBindJSON(&req)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
+		return
+	}
+
+	resp, err := c.service.CreateVehicle(ctx, req)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err})
 		return
