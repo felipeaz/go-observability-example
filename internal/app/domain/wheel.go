@@ -8,6 +8,6 @@ var (
 )
 
 type Wheel struct {
-	State WheelState
-	Size  int
+	State WheelState `json:"state"`
+	Size  int        `json:"size"`
 }

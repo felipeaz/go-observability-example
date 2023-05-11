@@ -7,6 +7,8 @@ import (
 	"go-observability-example/internal/app/service"
 )
 
+const _plateParam = "plate"
+
 type Params struct {
 	Router  *gin.Engine
 	Service service.Service
@@ -31,20 +33,20 @@ func (c *controller) CreateVehicle(ctx *gin.Context) {
 	var req service.CreateVehicleRequest
 	err := ctx.ShouldBindJSON(&req)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	resp, err := c.service.CreateVehicle(ctx, req)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	ctx.JSON(http.StatusCreated, gin.H{"plate": resp})
 }
 
 func (c *controller) GetVehicleByPlate(ctx *gin.Context) {
-	plate := ctx.Param("plate")
+	plate := ctx.Param(_plateParam)
 	if plate == "" {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "plate is empty"})
 		return
@@ -52,7 +54,7 @@ func (c *controller) GetVehicleByPlate(ctx *gin.Context) {
 
 	resp, err := c.service.GetVehicleByPlate(ctx, plate)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	ctx.JSON(http.StatusOK, gin.H{"data": resp})

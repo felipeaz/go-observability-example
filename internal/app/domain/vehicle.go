@@ -14,12 +14,12 @@ type VehicleInterface interface {
 }
 
 type Vehicle struct {
-	Plate    string
-	Doors    int
-	MaxSpeed float64
-	Wheels   []Wheel
-	FuelTank FuelTank
-	Model    VehicleModel
+	Plate    string       `json:"plate"`
+	Doors    int          `json:"doors"`
+	MaxSpeed float64      `json:"maxSpeed"`
+	Wheels   []Wheel      `json:"wheels"`
+	FuelTank FuelTank     `json:"fuelTank"`
+	Model    VehicleModel `json:"model"`
 }
 
 func (v *Vehicle) Drive() {

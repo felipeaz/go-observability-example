@@ -1,6 +1,7 @@
 package redis
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -37,9 +38,14 @@ func (r *Redis) Set(key string, value interface{}) error {
 	}
 	defer conn.Close()
 
-	_, err = conn.Do(_setAction, key, value)
+	valueBytes, err := json.Marshal(value)
 	if err != nil {
-		log.Printf(_failedToSetKey, key, value, err)
+		return err
+	}
+
+	_, err = conn.Do(_setAction, key, valueBytes)
+	if err != nil {
+		log.Printf(_failedToSetKey, key, valueBytes, err)
 	}
 
 	return err
@@ -56,6 +62,7 @@ func (r *Redis) Get(key string) ([]byte, error) {
 	if err != nil {
 		log.Printf(_failedToGetKey, key, err)
 	}
+	log.Println(string(data))
 	return data, err
 }
 

@@ -8,5 +8,5 @@ import (
 
 type Service interface {
 	CreateVehicle(ctx context.Context, request CreateVehicleRequest) (plate string, err error)
-	GetVehicleByPlate(ctx context.Context, plate string) (domain.VehicleInterface, error)
+	GetVehicleByPlate(ctx context.Context, plate string) (domain.Vehicle, error)
 }

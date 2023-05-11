@@ -9,7 +9,7 @@ import (
 
 const (
 	Model                domain.VehicleModel = "AUDI"
-	_plateFmt                                = "%s-%d"
+	_plateFmt                                = "%s%d"
 	_doors                                   = 4
 	_maxSpeed                                = 300
 	_wheelSize                               = 21
@@ -17,8 +17,8 @@ const (
 	_fuelAcceptsAlcohol                      = false
 )
 
-func NewVehicle() *domain.Vehicle {
-	return &domain.Vehicle{
+func NewVehicle() domain.Vehicle {
+	return domain.Vehicle{
 		Plate:    fmt.Sprintf(_plateFmt, Model, plate.New()),
 		Doors:    _doors,
 		MaxSpeed: _maxSpeed,

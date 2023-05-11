@@ -8,7 +8,7 @@ var (
 )
 
 type FuelTank struct {
-	AcceptsGasoline bool
-	AcceptsAlcohol  bool
-	State           FuelState
+	AcceptsGasoline bool      `json:"acceptsGasoline"`
+	AcceptsAlcohol  bool      `json:"acceptsAlcohol"`
+	State           FuelState `json:"state"`
 }
