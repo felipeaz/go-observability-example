@@ -5,6 +5,11 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus"
+)
+
+var (
+	errTest = errors.New("test error")
 )
 
 type Params struct {
@@ -25,10 +30,21 @@ func New(p Params) Controller {
 }
 
 func (c *controller) Success(ctx *gin.Context) {
+	successCounter := prometheus.NewCounter(
+		prometheus.CounterOpts{
+			Name: "myapp_success_ops_total",
+			Help: "total success operation",
+		})
+	successCounter.Inc()
 	ctx.JSON(http.StatusOK, gin.H{})
 }
 
 func (c *controller) Error(ctx *gin.Context) {
-	err := errors.New("test error")
-	ctx.JSON(http.StatusInternalServerError, gin.H{"error": err})
+	errorCounter := prometheus.NewCounter(
+		prometheus.CounterOpts{
+			Name: "myapp_error_ops_total",
+			Help: "total operation errors",
+		})
+	errorCounter.Inc()
+	ctx.JSON(http.StatusInternalServerError, gin.H{"error": errTest})
 }

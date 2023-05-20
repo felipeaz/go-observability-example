@@ -23,7 +23,6 @@ type app struct {
 
 func Build(p Params) App {
 	prometheus.RegisterMetrics(p.Router)
-
 	return &app{
 		router:     p.Router,
 		controller: p.Controller,

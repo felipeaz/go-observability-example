@@ -9,8 +9,6 @@ services:
     networks:
       - app-net
     working_dir: "/app/cmd"
-    links:
-      - redis
     expose:
       - 8080
     command: bash -c "CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main . && ./main"
