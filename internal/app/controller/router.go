@@ -4,6 +4,6 @@ func (c *controller) initializeRoutes() {
 	vehicles := c.router.Group("/api")
 
 	v1 := vehicles.Group("/v1")
-	v1.POST("/vehicle", c.CreateVehicle)
-	v1.GET("/vehicle/:plate", c.GetVehicleByPlate)
+	v1.GET("/success", c.Success)
+	v1.GET("/error", c.Error)
 }

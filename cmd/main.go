@@ -5,23 +5,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go-observability-example/build/app"
-	"go-observability-example/infra/redis"
 	"go-observability-example/internal/app/controller"
-	"go-observability-example/internal/app/service"
 )
 
 func main() {
 	ginEngine := gin.Default()
-
-	redisServer := redis.New("redis", "6379")
-
 	appController := controller.New(controller.Params{
 		Router: ginEngine,
-		Service: service.New(
-			service.Params{
-				Storage: redisServer,
-			},
-		),
 	})
 
 	serviceApp := app.Build(app.Params{

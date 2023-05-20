@@ -9,8 +9,6 @@ services:
     networks:
       - app-net
     working_dir: "/app/cmd"
-    depends_on:
-      - "redis"
     links:
       - redis
     expose:
@@ -18,12 +16,5 @@ services:
     command: bash -c "CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main . && ./main"
     ports:
       - "8080:8080"
-  redis:
-    image: redis:alpine
-    container_name: redis
-    networks:
-      - app-net
-    ports:
-      - "6380:6379"
 networks:
   app-net:

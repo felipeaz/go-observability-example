@@ -5,6 +5,6 @@ import (
 )
 
 type Controller interface {
-	CreateVehicle(ctx *gin.Context)
-	GetVehicleByPlate(ctx *gin.Context)
+	Success(ctx *gin.Context)
+	Error(ctx *gin.Context)
 }
