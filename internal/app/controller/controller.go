@@ -6,10 +6,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
 var (
-	errTest = errors.New("test error")
+	errTest      = errors.New("test error")
+	promRegistry = prometheus.NewRegistry()
 )
 
 type Params struct {
@@ -30,7 +32,7 @@ func New(p Params) Controller {
 }
 
 func (c *controller) Success(ctx *gin.Context) {
-	successCounter := prometheus.NewCounter(
+	successCounter := promauto.With(promRegistry).NewCounter(
 		prometheus.CounterOpts{
 			Name: "myapp_success_ops_total",
 			Help: "total success operation",
@@ -40,11 +42,11 @@ func (c *controller) Success(ctx *gin.Context) {
 }
 
 func (c *controller) Error(ctx *gin.Context) {
-	errorCounter := prometheus.NewCounter(
+	errorCounter := promauto.With(promRegistry).NewCounter(
 		prometheus.CounterOpts{
 			Name: "myapp_error_ops_total",
 			Help: "total operation errors",
 		})
 	errorCounter.Inc()
-	ctx.JSON(http.StatusInternalServerError, gin.H{"error": errTest})
+	ctx.JSON(http.StatusInternalServerError, gin.H{"error": errTest.Error()})
 }

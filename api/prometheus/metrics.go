@@ -10,5 +10,13 @@ const (
 )
 
 func RegisterMetrics(router *gin.Engine) {
-	router.GET(prometheusMetricPath, gin.WrapH(promhttp.Handler()))
+	router.GET(prometheusMetricPath, prometheusHandler())
+}
+
+func prometheusHandler() gin.HandlerFunc {
+	h := promhttp.Handler()
+
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
+	}
 }
