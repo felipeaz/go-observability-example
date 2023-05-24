@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-observability-example/api/prometheus"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -10,6 +11,8 @@ import (
 
 func main() {
 	ginEngine := gin.Default()
+	ginEngine.Use(prometheus.Middleware())
+
 	appController := controller.New(controller.Params{
 		Router: ginEngine,
 	})

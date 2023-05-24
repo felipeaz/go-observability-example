@@ -19,7 +19,9 @@ type Params struct {
 }
 
 type controller struct {
-	router *gin.Engine
+	router        *gin.Engine
+	successMetric prometheus.Counter
+	errorMetric   prometheus.Counter
 }
 
 func New(p Params) Controller {
@@ -28,25 +30,27 @@ func New(p Params) Controller {
 	}
 	defer ctrl.initializeRoutes()
 
-	return ctrl
-}
-
-func (c *controller) Success(ctx *gin.Context) {
-	successCounter := promauto.With(promRegistry).NewCounter(
+	ctrl.successMetric = promauto.NewCounter(
 		prometheus.CounterOpts{
 			Name: "myapp_success_ops_total",
 			Help: "total success operation",
 		})
-	successCounter.Inc()
-	ctx.JSON(http.StatusOK, gin.H{})
-}
 
-func (c *controller) Error(ctx *gin.Context) {
-	errorCounter := promauto.With(promRegistry).NewCounter(
+	ctrl.errorMetric = promauto.NewCounter(
 		prometheus.CounterOpts{
 			Name: "myapp_error_ops_total",
 			Help: "total operation errors",
 		})
-	errorCounter.Inc()
+
+	return ctrl
+}
+
+func (c *controller) Success(ctx *gin.Context) {
+	c.successMetric.Inc()
+	ctx.JSON(http.StatusOK, gin.H{})
+}
+
+func (c *controller) Error(ctx *gin.Context) {
+	c.errorMetric.Inc()
 	ctx.JSON(http.StatusInternalServerError, gin.H{"error": errTest.Error()})
 }
