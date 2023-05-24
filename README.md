@@ -11,3 +11,5 @@ It also automatically generates Go metrics such as number of goroutines, memory 
 
 ### Grafana
 Grafana is our dashboard where we integrate with Prometheus and build graphs with that data. With that we can generate useful dashboards that helps identifying outages, annomalies, rps, latency and so on.
+
+<img width="1504" alt="Screenshot 2023-05-24 at 11 07 49 AM" src="https://github.com/felipeaz/go-observability-example/assets/32846823/98c50b09-79ec-44fa-ae17-b85387708f85">
