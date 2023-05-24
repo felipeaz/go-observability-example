@@ -3,14 +3,14 @@ package prometheus
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
-var totalRequests = prometheus.NewCounterVec(
+var totalRequests = promauto.NewCounter(
 	prometheus.CounterOpts{
 		Name: "myapp_http_requests_total",
 		Help: "Number of get requests.",
 	},
-	[]string{"path"},
 )
 
 func Middleware() gin.HandlerFunc {
@@ -19,6 +19,6 @@ func Middleware() gin.HandlerFunc {
 			c.Next()
 			return
 		}
-		totalRequests.WithLabelValues("path").Inc()
+		totalRequests.Inc()
 	}
 }
